@@ -4,16 +4,23 @@
 
     <groupId>io.github.zhinushannan</groupId>
     <artifactId>annolog</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.2-RELEASE</version>
     <packaging>jar</packaging>
 
     <name>annolog</name>
-    <url>http://maven.apache.org</url>
+    <url>https://github.com/zhinushannan/anno-log</url>
+    <description>An annotation-based log component that serves web applications.</description>
+
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <github.global.server>github</github.global.server>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <repo.url>https://github.com/zhinushannan/anno-log</repo.url>
+        <repo.https.url>https://github.com/zhinushannan/anno-log.git</repo.https.url>
+        <java.home>/Library/Java/JavaVirtualMachines/jdk1.8.0_333.jdk/Contents/Home</java.home>
     </properties>
+
 
     <dependencies>
 
@@ -51,43 +58,100 @@
             <version>9.0.33</version>
         </dependency>
     </dependencies>
+
+    <developers>
+        <developer>
+            <name>zhinushannan</name>
+            <email>zhinushannan@gmail.com</email>
+            <organization>github</organization>
+            <organizationUrl>https://github.com/zhinushannan</organizationUrl>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:${repo.https.url}</connection>
+        <developerConnection>scm:git:${repo.https.url}</developerConnection>
+        <url>${repo.url}</url>
+        <tag>${version}</tag>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.8.2</version>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
                 <configuration>
-                    <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/anno-log
-                    </altDeploymentRepository>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
-
             <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <version>0.12</version>
-                <configuration>
-                    <message>Maven artifacts for ${project.version}</message>
-                    <noJekyll>true</noJekyll>
-                    <outputDirectory>${project.build.directory}/anno-log</outputDirectory>
-                    <branch>refs/heads/main</branch>
-                    <merge>true</merge>
-                    <includes>
-                        <include>**/*</include>
-                    </includes>
-                    <repositoryName>anno-log</repositoryName>
-                    <repositoryOwner>zhinushannan</repositoryOwner>
-                </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
                 <executions>
                     <execution>
+                        <id>attach-sources</id>
                         <goals>
-                            <goal>site</goal>
+                            <goal>jar-no-fork</goal>
                         </goals>
-                        <phase>deploy</phase>
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+                </configuration>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
+
 </project>
