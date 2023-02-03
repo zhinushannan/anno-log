@@ -23,8 +23,9 @@ public class LogAspect {
 
     private final static List<AnnoLogProcessor> processors = new ArrayList<AnnoLogProcessor>();
 
-    public void addProcessor(AnnoLogProcessor processor) {
+    public LogAspect addProcessor(AnnoLogProcessor processor) {
         processors.add(processor);
+        return this;
     }
 
     public LogAspect(boolean openDefault) {
