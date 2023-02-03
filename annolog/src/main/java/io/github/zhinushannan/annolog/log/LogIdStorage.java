@@ -2,7 +2,7 @@ package io.github.zhinushannan.annolog.log;
 
 public class LogIdStorage {
 
-    private static ThreadLocal<String> logIdStorage = new ThreadLocal<>();
+    private static final ThreadLocal<String> logIdStorage = new ThreadLocal<String>();
 
     protected static void save(String logId) {
         logIdStorage.set(logId);

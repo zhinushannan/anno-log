@@ -23,7 +23,7 @@ public class LogAspect {
 
     private final static List<AnnoLogProcessor> processors = new ArrayList<AnnoLogProcessor>();
 
-    public static void addProcessor(AnnoLogProcessor processor) {
+    public void addProcessor(AnnoLogProcessor processor) {
         processors.add(processor);
     }
 
