@@ -10,6 +10,16 @@
 
 于是，我开发了这个基于注解的、为web应用服务的组件。
 
+本项目可以：
+
+- 注解+参数，免去配置
+- 编写简单的配置类，不需要编写配置文件
+- 需要哪个接口的日志就注解哪个方法，呼之即来挥之即去
+
+本项目不可以：
+
+- 直接在生产环境中使用
+
 # 如何使用？
 
 首先我们要创建一个Spring Boot项目。
@@ -17,7 +27,11 @@
 在`pom.xml` 的`dependencies`标签内添加：
 
 ```xml
-暂未发布，等待补充
+        <dependency>
+            <groupId>io.github.zhinushannan</groupId>
+            <artifactId>annolog</artifactId>
+            <version>0.0.2-RELEASE</version>
+        </dependency>
 ```
 
 编写配置类：
