@@ -46,7 +46,11 @@ public class DefaultProcessor implements AnnoLogProcessor {
         // === 获取类业务名和方法业务名，允许方法重载 ===
         // =======================================
         // 获取控制类上的 business
-        String ctlBusiness = ctlClass.getAnnotation(CtlPoint.class).business();
+        CtlPoint ctlPoint = ctlClass.getAnnotation(CtlPoint.class);
+        String ctlBusiness = "";
+        if (ctlPoint != null) {
+            ctlBusiness = ctlPoint.business();
+        }
         // 获得该请求对应的方法
         String functionBusiness = "";
         Method signMethod = getMethod(ctlClass, uri, method);
@@ -63,10 +67,7 @@ public class DefaultProcessor implements AnnoLogProcessor {
             businessName = functionBusiness;
         }
 
-
-        if (businessName.length() != 0) {
-            logger.info("【{}】业务名称：{}", LogIdStorage.get(), businessName);
-        }
+        logger.info("【{}】业务名称：{}", LogIdStorage.get(), businessName);
         logger.info("【{}】请求信息：{} {} {}.{}", LogIdStorage.get(), uri, method, ctlClass.getName(), function);
         logger.info("【{}】远程地址：{}", LogIdStorage.get(), remoteAddr);
         logger.info("【{}】请求参数：{}", LogIdStorage.get(), params);
