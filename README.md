@@ -87,9 +87,9 @@ public class DemoController {
 
 > `@CtlPoint` 是作用在控制类上的，`@MappingPoint`是作用在控制类中带有`@RequestMapping`注解的函数上的。
 >
-> 日志只会打印出有`@MappingPoint`注解的函数，`@CtlPoint` 可省略。
+> 日志只会打印出有`@MappingPoint`注解的函数，`@CtlPoint` 必须添加。
 >
-> 如果`@MappingPoint`和`@CtlPoint` 的`business`都有值，在日志的业务名称中会输出`{CtlPoint.business} - {MappingPoint.business}`。而如果只有其一，则只会输出仅有的值，省略连接符`-`。
+> 在日志的业务名称中会输出`{CtlPoint.business} - {MappingPoint.business}`。
 >
 > 最前面的`【01db7cc3】`的含义是该请求的ID，此ID由日志插件生成，用于区分哪些请求是同一个请求。
 
